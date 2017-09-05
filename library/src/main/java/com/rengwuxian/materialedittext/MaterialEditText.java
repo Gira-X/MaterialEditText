@@ -1283,6 +1283,14 @@ public class MaterialEditText extends MaterialBaseEditText {
         return bottomLinesAnimator;
     }
 
+    void renderClearButton() {
+        if (hasFocus() && showClearButton && !TextUtils.isEmpty(getText()) && isEnabled()) {
+            showClearButton();
+        } else {
+            hideClearButton();
+        }
+    }
+
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
 
@@ -1305,10 +1313,7 @@ public class MaterialEditText extends MaterialBaseEditText {
             canvas.drawBitmap(icon, iconRight, iconTop, paint);
         }
 
-        // draw the clear button
-        if (hasFocus() && showClearButton && !TextUtils.isEmpty(getText()) && isEnabled()) {
-            showClearButton();
-        }
+        renderClearButton();
 
         // draw the underline
         if (!hideUnderline) {
